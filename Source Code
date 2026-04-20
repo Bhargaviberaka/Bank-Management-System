@@ -1,0 +1,86 @@
+package practiceOne;
+
+abstract class Account{
+	protected String accholder;
+	protected int accnumber;
+	protected int balance;
+	
+	Account(String accholder,int accnumber,int balance){
+		this.accholder = accholder;
+		this.accnumber = accnumber;
+		this.balance = balance; 
+	}
+	
+	abstract  void deposit(int amount);
+	
+	abstract public void withdraw(int amount);
+	
+	public void displayDetails() {
+		System.out.println("Account holder name: "+ accholder);
+		System.out.println("Account number: "+accnumber);
+		System.out.println("Account balance: "+balance);
+	}
+}
+
+class SavingsAcc extends Account{
+	
+	SavingsAcc (String accholder,int accnumber,int balance){
+		
+		super(accholder,accnumber,balance);
+	}
+			
+	 void deposit(int amount) {
+		 int deposit_balance = balance + amount;
+	 }
+	
+	public void withdraw(int amount) {
+		if(balance>amount) {
+			balance = balance-amount;
+			System.out.println("Savings Balance amount: "+balance);
+		}else {
+			System.out.println("Insufficient balance");
+		}
+	}
+	
+	public void addInterest() {
+		int intrstrate = 6;
+		balance = balance + balance * intrstrate /100;
+	}
+	
+}
+
+class Current extends Account{
+	Current (String accholder,int accnumber,int balance){
+		super(accholder,accnumber,balance);
+	}
+		
+	public void deposit(int amount) {
+		int deposit_balance1= balance + amount;
+	
+	}
+	
+	public void withdraw(int amount) { 
+		if(balance>amount) {
+			balance =	 balance-amount;
+			System.out.println("Current balance: "+balance);
+		}else {
+			System.out.println("Insufficient balance");
+		}
+		
+	}
+	
+
+	int overdraftlimit = 1000;
+	
+}
+
+public class BankAcc {
+public static void main(String[] args) {
+
+	Account acc = new Current("Bhargavi",121204,29000);
+	acc.displayDetails();
+	acc.deposit(5000);
+	acc.withdraw(2000);
+	acc.displayDetails();
+}
+}
